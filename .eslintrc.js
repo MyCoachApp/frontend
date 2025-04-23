@@ -15,6 +15,13 @@ module.exports = {
     'react/react-in-jsx-scope': 'off',
     'no-undef': 'error',
   },
+  parserOptions: {
+    ecmaVersion: latest,
+    sourceType: 'module',
+    ecmaFeatures: {
+    jsx: true
+    }
+    },
   env: {
     browser: true,
     node: true,
