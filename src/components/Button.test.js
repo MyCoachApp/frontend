@@ -5,7 +5,7 @@ import Button from './Button';
 describe('Button component', () => {
   afterEach(() => {
     jest.clearAllMocks();
-    });
+  });
   test('renders button with correct text', () => {
     render(<Button>Click me</Button>);
     const buttonElement = screen.getByText(/click me/i);
@@ -15,10 +15,10 @@ describe('Button component', () => {
   test('calls onClick when button is clicked', () => {
     const handleClick = jest.fn();
     render(<Button onClick={handleClick}>Click me</Button>);
-    
+
     const buttonElement = screen.getByText(/click me/i);
     fireEvent.click(buttonElement);
-    
+
     expect(handleClick).toHaveBeenCalledTimes(1);
   });
 });

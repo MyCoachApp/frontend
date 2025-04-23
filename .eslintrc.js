@@ -16,7 +16,7 @@ module.exports = {
     'no-undef': 'error',
   },
   parserOptions: {
-    ecmaVersion: latest,
+    ecmaVersion: 'latest',
     sourceType: 'module',
     ecmaFeatures: {
     jsx: true
