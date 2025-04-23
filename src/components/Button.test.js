@@ -3,6 +3,9 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import Button from './Button';
 
 describe('Button component', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+    });
   test('renders button with correct text', () => {
     render(<Button>Click me</Button>);
     const buttonElement = screen.getByText(/click me/i);
