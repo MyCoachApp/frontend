@@ -35,13 +35,13 @@ module.exports = function (config) {
         }
       },
       reporters: ['progress', 'kjhtml'],
-      browsers: ['ChromeHeadlessCI'],
       customLaunchers: {
         ChromeHeadlessCI: {
           base: 'ChromeHeadless',
           flags: ['--no-sandbox', '--disable-gpu']
         }
       },
+      browsers: ['ChromeHeadless'],
       restartOnFileChange: true,
       failOnEmptyTestSuite: false,
       browserNoActivityTimeout: 60000,
