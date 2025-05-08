@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppRoutingModule } from './app-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-import { AuthModule } from './features/auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
-    
+
   ],
   imports: [
     BrowserModule,
-    AuthModule,
+    BrowserAnimationsModule,
+    RouterModule,
+    CoreModule,
+    SharedModule,
     AppComponent,
-    AppRoutingModule
   ],
-  providers: [
-  ],
+  providers: [],
   bootstrap: []
 })
 export class AppModule { }

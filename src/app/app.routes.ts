@@ -1,11 +1,17 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [
-  { path: '', redirectTo: 'auth/register', pathMatch: 'full' },
+export const APP_ROUTES: Routes = [
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
-    path: 'auth',
+    path: '',
     loadChildren: () => import('./features/auth/auth.routes')
       .then(mod => mod.AUTH_ROUTES)
   },
-  { path: '**', redirectTo: 'auth/register' }
+  {
+    path: 'client-management',
+    loadChildren: () => import('./features/client-management/client-management.routes')
+      .then(mod => mod.CLIENT_MANAGEMENT_ROUTES),
+      // canActivate: [AuthGuard] dodać jak będzie logowanie
+  },
+  { path: '**', redirectTo: 'login' }
 ];
