@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { finalize } from 'rxjs/operators';
-import { RegistrationFormService } from '../services/registration-form.service';
-import { RegisterResponse } from '../models/register-response.interface';
-import { RegisterData } from '../models/register-data.interface';
+import { RegistrationFormService } from '../../services/registration-form.service';
+import { RegisterResponse } from '../../models/register-response.interface';
+import { RegisterData } from '../../models/register-data.interface';
 
 
 @Component({

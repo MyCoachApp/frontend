@@ -35,22 +35,35 @@ export class RegistrationFormService {
    */
   handleRegistrationError(error: unknown): string {
     if (error instanceof HttpErrorResponse) {
-      if (error.status === 409) {
+      const { status, error: serverError } = error;
+  
+      if (status === 409) {
         return 'Konto z tym adresem email już istnieje';
-      } else if (error.error?.message) {
-        return error.error.message;
-      } else if (typeof error.error === 'string') {
-        return error.error;
-      } else {
-        return `Błąd podczas rejestracji (${error.status})`;
       }
-    } else if (error?.message) {
-      return error.message;
-    } else {
-      return 'Wystąpił nieoczekiwany błąd podczas rejestracji';
+  
+      if (typeof serverError === 'string') {
+        return serverError;
+      }
+  
+      if (serverError && typeof serverError === 'object' && 'message' in serverError) {
+        return (serverError as { message: string }).message;
+      }
+  
+      return `Błąd podczas rejestracji (${status})`;
     }
+  
+    if (
+      typeof error === 'object' &&
+      error !== null &&
+      'message' in error &&
+      typeof (error as any).message === 'string'
+    ) {
+      return (error as { message: string }).message;
+    }
+  
+    return 'Wystąpił nieoczekiwany błąd podczas rejestracji';
   }
-
+  
   /**
    * Walidator sprawdzający siłę hasła
    * Wymaga co najmniej jednej małej litery, jednej wielkiej litery,

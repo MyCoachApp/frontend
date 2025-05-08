@@ -1,7 +1,12 @@
 import { Routes } from '@angular/router';
+import { LandingPageComponent } from './core/landing-page/landing-page.component';
 
 export const APP_ROUTES: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { 
+    path: '', 
+    component: LandingPageComponent,
+    title: 'Strona główna' 
+  },
   {
     path: '',
     loadChildren: () => import('./features/auth/auth.routes')
@@ -13,5 +18,5 @@ export const APP_ROUTES: Routes = [
       .then(mod => mod.CLIENT_MANAGEMENT_ROUTES),
       // canActivate: [AuthGuard] dodać jak będzie logowanie
   },
-  { path: '**', redirectTo: 'login' }
+  { path: '**', redirectTo: '/' }
 ];
