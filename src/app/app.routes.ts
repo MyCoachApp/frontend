@@ -1,3 +1,27 @@
 import { Routes } from '@angular/router';
+import { LandingPageComponent } from './core/landing-page/landing-page.component';
 
-export const routes: Routes = [];
+export const APP_ROUTES: Routes = [
+  { 
+    path: '', 
+    component: LandingPageComponent,
+    title: 'Strona główna' 
+  },
+  {
+    path: '',
+    loadChildren: () => import('./features/auth/auth.routes')
+      .then(mod => mod.AUTH_ROUTES)
+  },
+  {
+    path: 'client-management',
+    loadChildren: () => import('./features/client-management/client-management.routes')
+      .then(mod => mod.CLIENT_MANAGEMENT_ROUTES),
+      // canActivate: [AuthGuard] dodać jak będzie logowanie
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./features/dashboard/dashboard.routes')
+      .then(mod => mod.DASHBOARD_ROUTES)
+  },
+  { path: '**', redirectTo: '/' }
+];
