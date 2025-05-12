@@ -1,0 +1,161 @@
+<div class="registration-container">
+  <div class="registration-card">
+    <h1 id="registration-title">Utwórz konto</h1>
+
+    <div *ngIf="errorMessage" role="alert" class="error-message" tabindex="0">
+      {{ errorMessage }}
+    </div>
+
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate aria-labelledby="registration-title">
+      <div class="form-group">
+        <label for="email" class="form-label">Adres e-mail</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+          autocomplete="email"
+          aria-required="true"
+          aria-describedby="email-error"
+        />
+        <div *ngIf="submitted && f['email'].errors" id="email-error" class="invalid-feedback" role="alert">
+          <span *ngIf="f['email'].errors['required']">Email jest wymagany</span>
+          <span *ngIf="f['email'].errors['email']">Wprowadź poprawny adres email</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="firstName" class="form-label">Imię</label>
+        <input
+          type="text"
+          id="firstName"
+          formControlName="firstName"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['firstName'].errors }"
+          autocomplete="given-name"
+          aria-required="true"
+          aria-describedby="firstName-error"
+        />
+        <div *ngIf="submitted && f['firstName'].errors" id="firstName-error" class="invalid-feedback" role="alert">
+          <span *ngIf="f['firstName'].errors['required']">Imię jest wymagane</span>
+          <span *ngIf="f['firstName'].errors['minlength']">Imię musi mieć co najmniej 2 znaki</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lastName" class="form-label">Nazwisko</label>
+        <input
+          type="text"
+          id="lastName"
+          formControlName="lastName"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['lastName'].errors }"
+          autocomplete="family-name"
+          aria-required="true"
+          aria-describedby="lastName-error"
+        />
+        <div *ngIf="submitted && f['lastName'].errors" id="lastName-error" class="invalid-feedback" role="alert">
+          <span *ngIf="f['lastName'].errors['required']">Nazwisko jest wymagane</span>
+          <span *ngIf="f['lastName'].errors['minlength']">Nazwisko musi mieć co najmniej 2 znaki</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password" class="form-label">Hasło</label>
+        <div class="password-input-container">
+          <input
+            [type]="passwordVisible ? 'text' : 'password'"
+            id="password"
+            formControlName="password"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+            autocomplete="new-password"
+            aria-required="true"
+            aria-describedby="password-requirements password-error"
+          />
+          <button 
+            type="button" 
+            class="password-toggle" 
+            (click)="togglePasswordVisibility('password')" 
+            [attr.aria-label]="passwordVisible ? 'Ukryj hasło' : 'Pokaż hasło'"
+            attr.aria-pressed="{{passwordVisible}}"
+          >
+            <i class="fa" [ngClass]="passwordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+        <div id="password-requirements" class="form-text">
+          Hasło musi zawierać co najmniej 8 znaków, w tym dużą literę, małą literę, cyfrę i znak specjalny.
+        </div>
+        <div *ngIf="submitted && f['password'].errors" id="password-error" class="invalid-feedback" role="alert">
+          <span *ngIf="f['password'].errors['required']">Hasło jest wymagane</span>
+          <span *ngIf="f['password'].errors['minlength']">Hasło musi mieć co najmniej 8 znaków</span>
+          <span *ngIf="f['password'].errors['weakPassword']">Hasło musi zawierać dużą literę, małą literę, cyfrę i znak specjalny</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="confirmPassword" class="form-label">Potwierdź hasło</label>
+        <div class="password-input-container">
+          <input
+            [type]="confirmPasswordVisible ? 'text' : 'password'"
+            id="confirmPassword"
+            formControlName="confirmPassword"
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && (f['confirmPassword'].errors || registrationForm.errors?.['passwordMismatch']) }"
+            autocomplete="new-password"
+            aria-required="true"
+            aria-describedby="confirm-password-error"
+          />
+          <button 
+            type="button" 
+            class="password-toggle" 
+            (click)="togglePasswordVisibility('confirmPassword')" 
+            [attr.aria-label]="confirmPasswordVisible ? 'Ukryj hasło' : 'Pokaż hasło'"
+            attr.aria-pressed="{{confirmPasswordVisible}}"
+          >
+            <i class="fa" [ngClass]="confirmPasswordVisible ? 'fa-eye-slash' : 'fa-eye'"></i>
+          </button>
+        </div>
+        <div *ngIf="submitted && (f['confirmPassword'].errors || registrationForm.errors?.['passwordMismatch'])" id="confirm-password-error" class="invalid-feedback" role="alert">
+          <span *ngIf="f['confirmPassword'].errors?.['required']">Potwierdzenie hasła jest wymagane</span>
+          <span *ngIf="registrationForm.errors?.['passwordMismatch']">Hasła muszą być identyczne</span>
+        </div>
+      </div>
+
+      <div class="form-group form-check">
+        <input
+          type="checkbox"
+          id="termsAccepted"
+          formControlName="termsAccepted"
+          class="form-check-input"
+          [ngClass]="{ 'is-invalid': submitted && f['termsAccepted'].errors }"
+          aria-required="true"
+          aria-describedby="terms-error"
+        />
+        <label class="form-check-label" for="termsAccepted">
+          Akceptuję <a href="/terms" target="_blank">regulamin</a> i <a href="/privacy" target="_blank">politykę prywatności</a>
+        </label>
+        <div *ngIf="submitted && f['termsAccepted'].errors" id="terms-error" class="invalid-feedback" role="alert">
+          Musisz zaakceptować regulamin i politykę prywatności
+        </div>
+      </div>
+
+      <div class="form-group">
+        <button 
+          type="submit" 
+          class="btn btn-primary btn-block" 
+          [disabled]="loading"
+          attr.aria-busy="{{loading}}"
+        >
+          <span *ngIf="loading" class="spinner" aria-hidden="true"></span>
+          <span>{{ loading ? 'Przetwarzanie...' : 'Zarejestruj się' }}</span>
+        </button>
+      </div>
+
+      <div class="form-group text-center">
+        Masz już konto? <a routerLink="/login" class="login-link">Zaloguj się</a>
+      </div>
+    </form>
+  </div>
+</div>
