@@ -18,5 +18,10 @@ export const APP_ROUTES: Routes = [
       .then(mod => mod.CLIENT_MANAGEMENT_ROUTES),
       // canActivate: [AuthGuard] dodać jak będzie logowanie
   },
+  {
+    path: 'dashboard',
+    loadChildren: () => import('./features/dashboard/dashboard.routes')
+      .then(mod => mod.DASHBOARD_ROUTES)
+  },
   { path: '**', redirectTo: '/' }
 ];
