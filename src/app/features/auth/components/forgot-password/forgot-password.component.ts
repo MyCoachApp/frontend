@@ -3,21 +3,20 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
-import { LoginFormComponent } from '../forms/login-form/login-form.component';
-
+import { ForgotPasswordFormComponent } from '../forms/forgot-password-form/forgot-password-form.component';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-forgot-password',
   standalone: true,
   imports: [
     CommonModule,
     RouterLink,
     MatCardModule,
-    AuthLayoutComponent,
-    LoginFormComponent
+    ForgotPasswordFormComponent,
+    AuthLayoutComponent
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './forgot-password.component.html',
+  styleUrls: ['./forgot-password.component.scss']
 })
-export class LoginComponent {
+export class ForgotPasswordComponent {
 }

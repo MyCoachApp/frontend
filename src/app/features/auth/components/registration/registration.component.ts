@@ -2,22 +2,21 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
+import { RegistrationFormComponent } from '../forms/registration-form/registration-form.component';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
-import { LoginFormComponent } from '../forms/login-form/login-form.component';
-
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-registration',
   standalone: true,
   imports: [
     CommonModule,
     RouterLink,
     MatCardModule,
     AuthLayoutComponent,
-    LoginFormComponent
+    RegistrationFormComponent
   ],
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  templateUrl: './registration.component.html',
+  styleUrls: ['./registration.component.scss']
 })
-export class LoginComponent {
+export class RegistrationComponent {
 }

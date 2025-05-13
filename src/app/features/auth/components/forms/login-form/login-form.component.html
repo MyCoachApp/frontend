@@ -1,0 +1,60 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+  <div class="form-header">
+    <img src="assets/images/logo.png" alt="Logo aplikacji" class="logo">
+    <h2>Witaj z powrotem!</h2>
+    <p>Zaloguj się, aby uzyskać dostęp do swojego konta</p>
+  </div>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="email" formControlName="email" required>
+    <mat-icon matSuffix>mail_outline</mat-icon>
+    @if (email?.invalid && email?.touched) {
+      <mat-error>
+        @if (email?.hasError('required')) {
+          Email jest wymagany
+        }
+        @if (email?.hasError('email')) {
+          Podaj poprawny adres email
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Hasło</mat-label>
+    <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="hidePassword ? 'Pokaż hasło' : 'Ukryj hasło'">
+      <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
+    </button>
+    @if (password?.invalid && password?.touched) {
+      <mat-error>
+        @if (password?.hasError('required')) {
+          Hasło jest wymagane
+        }
+        @if (password?.hasError('minlength')) {
+          Hasło musi mieć co najmniej 6 znaków
+        }
+      </mat-error>
+    }
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    color="primary"
+    class="submit-button"
+    type="submit"
+    [disabled]="loginForm.invalid || isLoading"
+  >
+    @if (isLoading) {
+      <mat-spinner diameter="24" mode="indeterminate"></mat-spinner>
+    } @else {
+      Zaloguj się
+    }
+  </button>
+
+  <div class="form-footer">
+    <a routerLink="/auth/forgot-password" class="forgot-password">Zapomniałeś hasła?</a>
+    <p>Nie masz jeszcze konta? <a routerLink="/auth/register" class="register-link">Zarejestruj się</a></p>
+  </div>
+</form>

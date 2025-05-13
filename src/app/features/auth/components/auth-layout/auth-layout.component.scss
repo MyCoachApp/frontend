@@ -1,0 +1,31 @@
+.auth-container {
+  display: flex;
+  height: 100vh; // zajmuje całą wysokość widoku
+  width: 100%; // zajmuje całą szerokość
+  
+  .auth-form {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    overflow-y: auto; // pozwala na scrollowanie jeśli formularz jest zbyt długi
+  }
+  
+  .auth-image {
+    flex: 1;
+    display: none; // domyślnie ukryte na mobile
+    
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; // zapewnia że obrazek wypełni kontener zachowując proporcje
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .auth-image {
+      display: block; // pokazuje obrazek na desktopach
+    }
+  }
+}

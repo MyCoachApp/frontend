@@ -43,7 +43,7 @@ export const APP_ROUTES: Routes = [
     ]
   },
   {
-    path: '',
+    path: 'auth',
     loadChildren: () => import('./features/auth/auth.routes')
       .then(mod => mod.AUTH_ROUTES)
   },
