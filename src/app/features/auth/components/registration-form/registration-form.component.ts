@@ -10,16 +10,16 @@ import { RegisterData } from '../../models/register-data.interface';
 
 
 @Component({
-  selector: 'app-registration',
-  templateUrl: './registration.component.html',
-  styleUrls: ['./registration.component.scss'],
+  selector: 'app-registration-form',
+  templateUrl: './registration-form.component.html',
+  styleUrls: ['./registration-form.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
     ReactiveFormsModule,
   ],
 })
-export class RegistrationComponent {
+export class RegistrationFormComponent {
   registrationForm: FormGroup;
   submitted = false;
   loading = false;

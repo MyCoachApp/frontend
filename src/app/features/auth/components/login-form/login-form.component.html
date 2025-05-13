@@ -1,49 +1,49 @@
-    <div class="login-container">
-      <h2>Logowanie</h2>
-      
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-      
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            placeholder="Podaj email"
-          />
-          <div *ngIf="email?.invalid && (email?.dirty || email?.touched)" class="validation-error">
-            <div *ngIf="email?.errors?.['required']">Email jest wymagany</div>
-            <div *ngIf="email?.errors?.['email']">Podaj prawidłowy adres email</div>
-          </div>
-        </div>
-        
-        <div class="form-group">
-          <label for="password">Hasło</label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            placeholder="Podaj hasło"
-          />
-          <div *ngIf="password?.invalid && (password?.dirty || password?.touched)" class="validation-error">
-            <div *ngIf="password?.errors?.['required']">Hasło jest wymagane</div>
-            <div *ngIf="password?.errors?.['minlength']">Hasło musi mieć co najmniej 6 znaków</div>
-          </div>
-        </div>
-        
-        <button 
-          type="submit" 
-          [disabled]="loginForm.invalid || isLoading"
-        >
-          <span *ngIf="isLoading">Logowanie...</span>
-          <span *ngIf="!isLoading">Zaloguj się</span>
-        </button>
-        
-        <div class="register-link">
-          Nie masz konta? <a routerLink="/register">Zarejestruj się</a>
-        </div>
-      </form>
-    </div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="email">E-mail:</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      [class.invalid]="loginForm.get('email')?.invalid && loginForm.get('email')?.touched"
+    >
+    @if (loginForm.get('email')?.hasError('required') && loginForm.get('email')?.touched) {
+      <div class="error-message">Email jest wymagany</div>
+    }
+    @if (loginForm.get('email')?.hasError('email') && loginForm.get('email')?.touched) {
+      <div class="error-message">Podaj poprawny adres email</div>
+    }
+  </div>
+
+  <div class="form-group">
+    <label for="password">Hasło:</label>
+    <input
+      type="password"
+      id="password"
+      formControlName="password"
+      [class.invalid]="loginForm.get('password')?.invalid && loginForm.get('password')?.touched"
+    >
+    @if (loginForm.get('password')?.hasError('required') && loginForm.get('password')?.touched) {
+      <div class="error-message">Hasło jest wymagane</div>
+    }
+    @if (loginForm.get('password')?.hasError('minlength') && loginForm.get('password')?.touched) {
+      <div class="error-message">Hasło musi mieć co najmniej 6 znaków</div>
+    }
+  </div>
+
+  @if (errorMessage) {
+    <div class="form-error">{{ errorMessage }}</div>
+  }
+
+  <button
+    type="submit"
+    class="submit-button"
+    [disabled]="loginForm.invalid || isLoading"
+  >
+    @if (isLoading) {
+      <span class="spinner"></span>
+    } @else {
+      Zaloguj się
+    }
+  </button>
+</form>
