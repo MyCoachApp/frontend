@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { SocialLoginFormComponent } from './social-login-form.component';
 
-import { SocialLoginFormComponent } from './social-login.component';
 
 describe('SocialLoginComponent', () => {
   let component: SocialLoginFormComponent;
