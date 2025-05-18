@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { AuthLayoutComponent } from '../auth-layout/auth-layout.component';
 import { LoginFormComponent } from '../forms/login-form/login-form.component';
@@ -11,7 +10,6 @@ import { LoginFormComponent } from '../forms/login-form/login-form.component';
   standalone: true,
   imports: [
     CommonModule,
-    RouterLink,
     MatCardModule,
     AuthLayoutComponent,
     LoginFormComponent

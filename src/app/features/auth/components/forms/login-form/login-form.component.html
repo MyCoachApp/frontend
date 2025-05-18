@@ -1,13 +1,18 @@
 <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
   <div class="form-header">
-    <img src="assets/images/logo.png" alt="Logo aplikacji" class="logo">
-    <h2>Witaj z powrotem!</h2>
-    <p>Zaloguj się, aby uzyskać dostęp do swojego konta</p>
+    <!-- <img src="assets/images/logo.png" alt="Logo aplikacji" class="logo"> -->
   </div>
+
+  @if (loginError) {
+    <div class="error-message">
+      <mat-icon>error_outline</mat-icon>
+      <span>{{ loginError }}</span>
+    </div>
+  }
 
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Email</mat-label>
-    <input matInput type="email" formControlName="email" required>
+    <input matInput type="email" formControlName="email" placeholder="twoj@email.com" required>
     <mat-icon matSuffix>mail_outline</mat-icon>
     @if (email?.invalid && email?.touched) {
       <mat-error>
@@ -24,7 +29,8 @@
   <mat-form-field appearance="outline" class="full-width">
     <mat-label>Hasło</mat-label>
     <input matInput [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
-    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" [attr.aria-label]="hidePassword ? 'Pokaż hasło' : 'Ukryj hasło'">
+    <button mat-icon-button matSuffix type="button" (click)="hidePassword = !hidePassword" 
+      [attr.aria-label]="hidePassword ? 'Pokaż hasło' : 'Ukryj hasło'" tabindex="-1">
       <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
     </button>
     @if (password?.invalid && password?.touched) {
@@ -47,14 +53,14 @@
     [disabled]="loginForm.invalid || isLoading"
   >
     @if (isLoading) {
-      <mat-spinner diameter="24" mode="indeterminate"></mat-spinner>
+      <mat-spinner diameter="24"></mat-spinner>
     } @else {
-      Zaloguj się
+      <span>Zaloguj się</span>
     }
   </button>
 
   <div class="form-footer">
-    <a routerLink="/auth/forgot-password" class="forgot-password">Zapomniałeś hasła?</a>
-    <p>Nie masz jeszcze konta? <a routerLink="/auth/register" class="register-link">Zarejestruj się</a></p>
+    <a routerLink="/auth/forgot-password" class="forgot-password">Nie pamiętasz hasła?</a>
+    <p>Nie masz konta? <a routerLink="/auth/register" class="register-link">Zarejestruj się</a></p>
   </div>
 </form>

@@ -1,23 +1,88 @@
+@use "sass:color";
+$primary-color: #1976d2;
+$primary-dark: color.scale($primary-color, $lightness: -10%);
+$accent-color: #43a047;
+$light-gray: #f5f5f5;
+$medium-gray: #e0e0e0;
+$dark-gray: #757575;
+$text-color: #333333;
+$shadow-color: rgba(0, 0, 0, 0.12);
+$error-color: #f44336;
+
 .login-card-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.login-card {
   width: 100%;
-  max-width: 400px; // ogranicza szerokość karty
+  max-width: 400px;
+  border-radius: 12px;
+  overflow: visible;
+  box-shadow: 0 8px 24px $shadow-color;
+  background-color: white;
+  position: relative;
   
-  .login-card {
-    padding: 2rem;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+  }
+  
+  .mat-mdc-card-header {
+    padding: 20px 20px 0;
     
-    .login-links {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      margin-top: 1rem;
+    .mat-mdc-card-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: $text-color;
+      margin-bottom: 0;
+      position: relative;
       
-      a {
-        text-decoration: none;
-        color: #3f51b5; // przykładowy kolor, dostosuj do swojej palety
-        &:hover {
-          text-decoration: underline;
-        }
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background-color: $accent-color;
       }
+    }
+  }
+  
+  .mat-mdc-card-content {
+    padding: 16px;
+  }
+  
+  .mat-mdc-card-actions {
+    padding: 0 24px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    
+    a {
+      color: $primary-color;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: $primary-dark;
+        text-decoration: underline;
+      }
+    }
+    
+    p {
+      margin: 0;
+      color: $dark-gray;
+      font-size: 14px;
     }
   }
 }
