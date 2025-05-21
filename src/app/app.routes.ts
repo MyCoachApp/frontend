@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './core/landing-page/landing-page.component';
-import { MainLayoutComponent } from './layout/components/main-layout/main-layout.component';
+import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -36,7 +36,7 @@ export const APP_ROUTES: Routes = [
       },
       {
         path: 'profile',
-        loadChildren: () => import('./features/user-profile/user.routes')
+        loadChildren: () => import('./features/user/routes/user.routes')
           .then(mod => mod.USER_PROFILE_ROUTES)
       },
     ]
