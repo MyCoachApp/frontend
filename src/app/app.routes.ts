@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { LandingPageComponent } from './core/landing-page/landing-page.component';
-import { MainLayoutComponent } from './layout/components/main-layout/main-layout.component';
+import { MainLayoutComponent } from './shared/layout/main-layout/main-layout.component';
 
 
 export const APP_ROUTES: Routes = [
@@ -20,12 +20,6 @@ export const APP_ROUTES: Routes = [
           .then(mod => mod.GYMS_ROUTES)
       },
       {
-        path: 'client-management',
-        loadChildren: () => import('./features/client-management/client-management.routes')
-          .then(mod => mod.CLIENT_MANAGEMENT_ROUTES),
-        // canActivate: [AuthGuard] // dodaj później
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./features/dashboard/dashboard.routes')
           .then(mod => mod.DASHBOARD_ROUTES)
@@ -39,7 +33,12 @@ export const APP_ROUTES: Routes = [
         path: 'progress-tracking',
         loadChildren: () => import('./features/progress-tracking/progress-tracking.routes')
           .then(mod => mod.PROGRESS_TRACKING_ROUTES)
-      }
+      },
+      {
+        path: 'profile',
+        loadChildren: () => import('./features/user/routes/user.routes')
+          .then(mod => mod.USER_PROFILE_ROUTES)
+      },
     ]
   },
   {
