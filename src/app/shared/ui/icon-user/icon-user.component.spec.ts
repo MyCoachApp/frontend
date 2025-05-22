@@ -1,28 +1,33 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { IconUserComponent } from './icon-user.component';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs';
+import { AuthService } from '../../../features/auth/services/auth.service';
 
 describe('IconUserComponent', () => {
   let component: IconUserComponent;
   let fixture: ComponentFixture<IconUserComponent>;
+  let routerSpy: jasmine.SpyObj<Router>;
+  let authServiceSpy: jasmine.SpyObj<AuthService>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [IconUserComponent,
-        HttpClientTestingModule,
-        RouterTestingModule
+  beforeEach(() => {
+    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    authServiceSpy = jasmine.createSpyObj('AuthService', ['isAuthenticated'], { authState$: new Subject() });
+
+    TestBed.configureTestingModule({
+      imports: [IconUserComponent],
+      providers: [
+        { provide: Router, useValue: routerSpy },
+        { provide: AuthService, useValue: authServiceSpy }
       ]
-    })
-    .compileComponents();
+    });
 
     fixture = TestBed.createComponent(IconUserComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should navigate to /profile when goToProfile is called', () => {
+    component.goToProfile();
+    expect(routerSpy.navigate).toHaveBeenCalledWith(['/profile']);
   });
 });

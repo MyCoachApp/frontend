@@ -16,7 +16,7 @@ import { MatSelectModule } from '@angular/material/select';
   templateUrl: './user-profile.component.html',
 })
 export class UserProfileComponent {
-  @Input() profile!: User;
+  @Input() profile?: User;
   @Input() mode: 'view' | 'edit' = 'view';
   @Input() loading = false;
   @Input() error?: string;
@@ -26,8 +26,14 @@ export class UserProfileComponent {
   }
 
   getInitials(): string {
-    const { firstName = '', lastName = '' } = this.profile || {};
-    return `${firstName[0] ?? ''}${lastName[0] ?? ''}`.toUpperCase();
+    if (!this.profile) {
+      return '';
+    }
+
+    const firstInitial = this.profile.firstName?.charAt(0) ?? '';
+    const lastInitial = this.profile.lastName?.charAt(0) ?? '';
+
+    return (firstInitial + lastInitial).toUpperCase();
   }
 
   onSave() {
